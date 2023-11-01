@@ -1,0 +1,101 @@
+.nav{
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0%;
+    background-color: #00ADB5;
+
+}
+
+body {
+    min-height: 100vh;
+    background: #EEEEEE;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    box-sizing: border-box;
+  }
+
+
+.nav > li {
+    padding-left:30px;
+    padding-right:30px;
+    font-size: 40px;
+    border-bottom: 0 !important;
+    box-shadow: 0 !important;
+}
+.nav > li :hover {
+    position: relative;
+    left: 10%;
+    color: #393E46;
+   
+}
+
+.nav a {
+    text-decoration: none;
+    color: #222831;
+}
+.navbar{
+    text-align: right;
+    margin-top: 0%;
+}
+h2 {
+    text-align: center;
+}
+
+.start{
+    margin-bottom: 10px;
+}
+.form-row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.form-group{
+    flex: 1;
+    margin-right: 5px;
+}
+
+.image-size {
+    width: 200px;
+    height: 300px;
+  }
+
+.movie-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+   
+}
+
+.movie-list > ul {
+    width: 30%; 
+    padding: 10px;
+    box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+}
+
+.movie-item {
+    display: grid;
+    grid-template-rows: min-content 1fr; /* Title on top, image below */
+    gap: 10px; /* Gap between title and image */
+}
+
+  .movie-title {
+    margin: 0; /* Remove default margin for the title */
+}
+
+
+@media (max-width: 768px) {
+    .movie-list {
+      display: block; /* Display movies vertically on screens with a width of 768px or smaller */
+    }
+  
+    .movie-list > ul {
+      width: 100%; /* Take up the full width of the container on smaller screens */
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  }

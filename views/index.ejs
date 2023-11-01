@@ -1,11 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pick A Movie</title>
+  <link rel="stylesheet" href="/styles/main.css">
 </head>
+
 <body>
+  <%- include('navbar.ejs') %>
+    <div class="container">
+      <h2>Welcome to the movie picker!</h2>
+      <p>Let's search for your next favourite Movie or TV Show: </p>
+      
+
+      <form action="/search" method="POST">
+        <div class="start">
+          <label for="country"> Select your country:</label>
+          <select id="country" name="country">
+            <option value="US" selected>USA</option>
+            <option value="AUS">Aus</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="genre"> Genre:</label>
+            <select id="genre" name="genre">
+              <option value="any" selected>Any</option>
+              <option value="action">Action</option>
+              <option value="drama">Drama</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="type">Type:</label>
+            <select id="type" name="type">
+              <option value="any" selected>Any</option>
+              <option value="movie">Movie</option>
+              <option value="tvShow">TV Show</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="streamingService">Streaming Service:</label>
+            <select id="streamingService" name="streamingService">
+              <option value="any" selected>Any</option>
+              <option value="netflix">Netflix</option>
+              <option value="amazonPrime">Amazon Prime</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit"> Search </button>
+        </div>
+
+      </form>
+
+    </div>
     
+      <% if (typeof movies !=='undefined' && movies.length> 0) { %>
+        <h2>Movies</h2>
+        <div class="movie-list">
+          <% movies.forEach((movie)=> { %>
+            <% const movieGenre=movie.genres %>
+              <ul>
+                <li>
+                  <div class="movie-item">
+             
+                  <%= movie.title %>
+                  <img src="<%= movie.imageurl[0] %>" alt="<% movie.original_title %> Poster" class="image-size">
+                  <div class="genres">
+                    <% if (movie.genre) { %>
+                      <% const genreArray=Object.values(movie.genre); %>
+                      <% genreArray.forEach(genre=> { %>
+                        <%= genre %>
+                          <% }); %>
+                        <% } else { %>
+                          Genres not available
+                        <% } %>
+                  </div>
+                  </div>
+        
+                </li>
+              </ul>
+              <% }) %>
+                <% } %>
+        
+        </div>
 </body>
+
 </html>
