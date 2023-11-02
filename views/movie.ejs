@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <%- include('navbar.ejs') %>
+    <h1><%= movieDetails.title  %></h1>
+    <div class = "movie-container">
+    <img src="<%= movieDetails.imageurl[0]%>" alt="<% movieDetails.title %> Poster" >
+    <p> <%= movieDetails.synopsis%> </p>
+    </div>
+    <div class="genres">
+        <% if (movieDetails.genre) { %>
+          <% const genreArray=Object.values(movieDetails.genre); %>
+          <p><strong>Genre:</strong></p> 
+          <% genreArray.forEach(genre=> { %>
+            <%= genre %>
+
+              <% }); %>
+
+            <% } else { %>
+
+            <p><strong> Genres not available </strong></p>
+            <% } %>
+    </div>
+
+    <div class = "streaming">
+        
+    </div>
+
+
+    
+</body>
+</html>

@@ -1,12 +1,8 @@
 // 1. Import express and axios
 import express from "express";
 import axios from "axios";
-import path from "path";
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+
 
 
 
@@ -63,7 +59,24 @@ app.post("/search", async(req,res) => {
   }
 })
 
-
+app.get("/movie/:id", async(req, res) => {
+  const movieId = req.params.id;
+  const updatedOptions = {
+    ...options,
+    url: 'https://ott-details.p.rapidapi.com/gettitleDetails',
+    params: {
+      imdbid: movieId,
+    },
+  };
+  try {
+    const response = await axios.request(updatedOptions);
+    const movieDetails = response.data;
+    res.render("movie.ejs", {movieDetails});
+  } catch (error) {
+    res.status(500).json({error: "An error occured" });
+    
+  }
+});
 
 
 // 6. Listen on your predefined port and start the server.

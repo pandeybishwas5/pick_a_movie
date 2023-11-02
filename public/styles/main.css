@@ -83,10 +83,22 @@ h2 {
     gap: 10px; /* Gap between title and image */
 }
 
-  .movie-title {
-    margin: 0; /* Remove default margin for the title */
+.image-hover:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+    cursor: pointer;
 }
 
+.movie-title {
+    margin: 0; /* Remove default margin for the title */
+}
+.movie-container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    transition: transform 0.2s;
+}
 
 @media (max-width: 768px) {
     .movie-list {

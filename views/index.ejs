@@ -61,7 +61,7 @@
 
     </div>
     
-      <% if (typeof movies !=='undefined' && movies.length> 0) { %>
+      <% if (typeof movies !=='undefined') { %>
         <h2>Movies</h2>
         <div class="movie-list">
           <% movies.forEach((movie)=> { %>
@@ -71,7 +71,12 @@
                   <div class="movie-item">
              
                   <%= movie.title %>
-                  <img src="<%= movie.imageurl[0] %>" alt="<% movie.original_title %> Poster" class="image-size">
+        
+                  <a href="/movie/<%= movie.imdbid %>">
+                    <img src="<%= movie.imageurl[0] %>" 
+                    alt="<% movie.title %> Poster" class="image-hover image-size">
+                  </a>
+                  
                   <div class="genres">
                     <% if (movie.genre) { %>
                       <% const genreArray=Object.values(movie.genre); %>
