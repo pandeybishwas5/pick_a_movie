@@ -21,14 +21,14 @@ const options = {
     page: '1'
   },
   headers: {
-    'X-RapidAPI-Key': '5545521360msh9481ab1e7e88958p1ccd39jsnb3c180e4a3d7',
+    'X-RapidAPI-Key': '7ff4ffdfe8msh1fb2a17ce6ec576p17ead1jsnfb6dd3516aab',
     'X-RapidAPI-Host': 'ott-details.p.rapidapi.com'
   }
 };
 
 // 2. Create an express app and set the port number.
 const app = express();
-const port = 3000;
+const port = 5000;
 
 
 
@@ -59,6 +59,16 @@ app.post("/search", async(req,res) => {
   }
 })
 
+
+const platformData = {
+  netflix: '/images/netflix.png',
+  hbomax: '/images/hbo.png',
+  amazon: '/images/prime.png',
+  youtube: '/images/youtube.png',
+  tubitv: '/images/tubi.png',
+  amazonprime: '/images/prime.png',
+  appletvplus: '/images/apple.png'
+}
 app.get("/movie/:id", async(req, res) => {
   const movieId = req.params.id;
   const updatedOptions = {
@@ -71,7 +81,8 @@ app.get("/movie/:id", async(req, res) => {
   try {
     const response = await axios.request(updatedOptions);
     const movieDetails = response.data;
-    res.render("movie.ejs", {movieDetails});
+    const streaming = movieDetails.streamingAvailability.country.US;
+    res.render("movie.ejs", {movieDetails, streaming, platformData});
   } catch (error) {
     res.status(500).json({error: "An error occured" });
     

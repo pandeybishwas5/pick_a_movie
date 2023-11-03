@@ -29,7 +29,19 @@
     </div>
 
     <div class = "streaming">
+      <% if(streaming) { %>
+        <p><strong>Platform: </strong></p>
+        <div class="streaming-icons">
+          <% streaming.forEach(stream => { %>
+            <% if (platformData[stream.platform]) { %>
+              <a href="<%= stream.url %>">
+                <img src="<%= platformData[stream.platform] %>" alt="<%= stream.platform %> Icon">
+              </a>
+            <% } %>
+          <% });%>
+        </div>
         
+      <% }  %>  
     </div>
 
 
