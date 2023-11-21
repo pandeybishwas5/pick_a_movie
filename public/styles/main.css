@@ -1,34 +1,39 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #292929;
+    background: linear-gradient(to bottom right, #292929, #1a1a1a);
+    color: #fff;
+    position: relative;
+}
+
+
 .nav{
     list-style-type: none;
     display: flex;
     justify-content: flex-start;
     padding: 0;
-    background-color: #00ADB5;
 
 }
 
 .container {
-    max-width: 700px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #f5f5f5;
+    border: 1px solid #FFC107;
+    background-color: transparent;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-top: 15px;
     transition: background-color 0.3s;
 }
+
 .container:hover {
-    background-color: #e0e0e0;
+    background-color: #313131;
 }
 
-body {
-    min-height: 100vh;
-    background: #EEEEEE;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    box-sizing: border-box;
-  }
+
 
 
 .nav  li {
@@ -59,17 +64,22 @@ body {
     text-align: right;
     margin-top: 0%;
 }
+
+
 h2 {
     text-align: center;
     font-size: 30px;
+    margin-top: 60px;
+    padding-top: 20px;
     margin-bottom: 15px;
-    color: #333;
+    color: #fff;
 }
 
 p {
     font-size: 16px;
+    text-align: center;
     margin-bottom: 20px;
-    color: #666;
+    color: #fff;
 }
   
 form {
@@ -91,20 +101,88 @@ select {
     margin-top: 5px;
     margin-bottom: 10px;
 }
+.buttonSearch {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 5vh; /* Example height, adjust as needed */
+}
 .search-button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
+    background-color: transparent; /* Set initial background to transparent */
+    color: #FFC107; /* Text color matches border color */
+    border: 2px solid #FFC107; /* Colored border */
+    border-radius: 8px; /* Increased border radius for a smoother edge */
+    padding: 10px 40px; /* Increased horizontal padding */
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s; /* Transition color and background */
+    position: relative; /* For creating the hover effect */
+    overflow: hidden; /* Hide the overflow to contain the hover effect */
 }
 
+/* Create a pseudo-element for the hover effect */
+.search-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%; /* Expand width for hover effect */
+    height: 300%; /* Expand height for hover effect */
+    background-color: #FFC107; /* Colored fill */
+    border-radius: 50%; /* Create a circular shape */
+    transition: width 0.3s ease-out, height 0.3s ease-out, transform 0.3s ease-out; /* Transition properties */
+    z-index: -1; /* Behind the button text */
+    transform: translate(-50%, -50%) scale(0); /* Initially hidden and scaled */
+}
 .search-button:hover {
-    background-color: #0056b3;
+    color: #393E46; /* Change text color on hover */
+}
+/* Hover effect */
+.search-button:hover::before {
+    transform: translate(-50%, -50%) scale(1); /* Expand the pseudo-element */
 }
 
+.toggle-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+    margin-bottom: 20px;
+
+}
+
+.radio-label {
+    position: relative;
+    display: inline-block;
+    padding-left: 30px;
+    padding-right: 30px;
+    cursor: pointer;
+    font-size: 18px; 
+  }
+  
+  .radio-label:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #FFC107; /* Change border color */
+    border-radius: 50%;
+  }
+  
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Adjust styles for checked state */
+  input[type="radio"]:checked + .radio-label:before {
+    background-color: #FFC107; /* Change background color */
+  }
+
+  
 
 .start{
     margin-bottom: 10px;
@@ -119,6 +197,8 @@ select {
 .form-group{
     flex: 1;
     margin-right: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .image-size {
@@ -140,14 +220,14 @@ select {
 
 
 .movie-list > ul {
-    flex: 0 1 calc(25% - 20px); /* 25% width with spacing in between */
+    flex: 0 1 calc(20% - 20px); /* 25% width with spacing in between */
     padding: 10px;
     box-sizing: border-box;
     list-style: none;
-    margin: 0;
+    margin: 0 0 15px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #393E46;
     transition: transform 0.2s;
 }
 
@@ -168,33 +248,65 @@ select {
     cursor: pointer;
     
 }
-
+h1 {
+    text-align: center;
+    margin-top: 60px;
+}
 .movie-title {
     margin: 0;
     font-size: 24px;
+    color: #fff;
     font-weight: bold;
     padding: 10px; 
 }
 
 .movie-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
-    padding: 10px;
-    transition: transform 0.2s;
-    text-align: center;
+    flex-direction: column;
+    margin-top: 60px;
 }
 
 .movie-container img {
-    max-width: 100%;
+    max-width: 300px;
     height: auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+p {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
+.genres {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.genres p {
+    margin-bottom: 10px;
+}
+
+.genres p strong {
+    font-size: 18px;
+}
+
+.streaming {
+    
+    margin-top: 30px;
+    text-align: center;
+    justify-content: center;
+}
+
+.streaming p strong {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
 .streaming-icons{
-    display: flex;
-    align-items: center;
+    position: relative;
     gap: 20px;
     padding: 10px;
     transition: transform 0.2s;
@@ -207,15 +319,40 @@ select {
 
 .streaming-icons img {
     width: 50px;
+    align-content: center;
     height: 50px;
-    transition: transform 0.2s;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
 }
 
 .streaming-icons img:hover{
-    transform: scale(1.1);
+    transform: scale(1.2);
     transition: transform 0.2s;
     cursor: pointer;
 }
+
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #fff;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+input[type="text"]:hover,
+input[type="text"]:focus {
+    border-color: #FFC107;
+    color: #FFC107;
+}
+
+/* Style for placeholder text */
+::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* Adjust placeholder color */
+}
+
 @media (max-width: 768px) {
     .movie-list {
         flex: 0 1 calc(50% - 20px) 

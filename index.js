@@ -1,6 +1,7 @@
 // 1. Import express and axios
 import express from "express";
 import axios from "axios";
+import bodyParser from "body-parser";
 
 
 
@@ -10,10 +11,10 @@ const options = {
   method: 'GET',
   url: 'https://ott-details.p.rapidapi.com/advancedsearch',
   params: {
-    start_year: '1970',
-    end_year: '2020',
+    start_year: '2000',
+    end_year: '2023',
     min_imdb: '6',
-    max_imdb: '7.8',
+    max_imdb: '10',
     genre: 'action',
     language: 'english',
     type: 'movie',
@@ -21,7 +22,7 @@ const options = {
     page: '1'
   },
   headers: {
-    'X-RapidAPI-Key': '7ff4ffdfe8msh1fb2a17ce6ec576p17ead1jsnfb6dd3516aab',
+    'X-RapidAPI-Key': 'dbd62d8321mshbd058676ead6c8ep155606jsn5cfd448fa71e',
     'X-RapidAPI-Host': 'ott-details.p.rapidapi.com'
   }
 };
@@ -34,7 +35,7 @@ const port = 5000;
 
 // 3. Use the public folder for static files.
 app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get("/", (req, res) => {
@@ -45,11 +46,26 @@ app.get("/about", (req, res) => {
   res.render("about.ejs")
 });
 
+app.get("/search", (req, res) => {
+  res.render("search.ejs")
+});
+
 
 app.post("/search", async(req,res) => {
-  
+  const mediaType = req.body.type;
+  const genreList = ['action', 'comedy', 'drama', 'thriller', 'horror'];
+  const randomGenre = genreList[Math.floor(Math.random() * genreList.length)];
+  console.log(randomGenre);
+
+  const updatedOptions = {
+    ...options,
+    params: {
+      genre: randomGenre,
+      type: mediaType,
+    },
+  };
   try {
-    const response = await axios.request(options);
+    const response = await axios.request(updatedOptions);
     const apiResponse = response.data;
     const movies = apiResponse.results;
     res.render("index.ejs", {movies});
@@ -59,6 +75,29 @@ app.post("/search", async(req,res) => {
   }
 })
 
+
+app.post("/searchtitle", async(req,res) => {
+  const newTitle = req.body.type;
+  console.log(newTitle);
+  const options = {
+    method: 'GET',
+    url: `https://cinema-api.p.rapidapi.com/get_ids/${newTitle}/movies`,
+    headers: {
+      'X-RapidAPI-Key': 'dbd62d8321mshbd058676ead6c8ep155606jsn5cfd448fa71e',
+      'X-RapidAPI-Host': 'cinema-api.p.rapidapi.com'
+    }
+  };
+  
+  try {
+    const response = await axios.request(options);
+    const apiResponse = response.data;
+    const results = apiResponse.data;
+    console.log(results);
+    res.render("search.ejs", {results});
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 const platformData = {
   netflix: '/images/netflix.png',
