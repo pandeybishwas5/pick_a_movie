@@ -9,7 +9,7 @@ Express Backend: Utilizes Express.js for handling server-side logic and API requ
 API Integration: Connects with a movie database API to retrieve movie information.
 
 Installation
-Clone the Repository: git clone https://github.com/your-username/your-project.git
+Clone the Repository: git clone https://github.com/pandeybishwas5/pick_a_movie.git
 
 Install Dependencies: 
 cd your-project
