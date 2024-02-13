@@ -20,7 +20,7 @@
         <div class="toggle-container">
           <input type="radio" id="movie" name="type" value="movie">
           <label for="movie" class="radio-label">Movie</label>
-          <input type="radio" id="tvshow" name="type" value="tvshow">
+          <input type="radio" id="tvshow" name="type" value="show">
           <label for="tvshow" class="radio-label">TV Show</label>
         </div>
       
@@ -44,8 +44,10 @@
                   <%= movie.title %>
         
                   <a href="/movie/<%= movie.imdbid %>">
-                    <img src="<%= movie.imageurl[0] %>" 
-                    alt="<% movie.title %> Poster" class="image-hover image-size">
+                    <% if (movie.hasOwnProperty('imageurl')) {%>
+                      <img src="<%= movie.imageurl[0] %>" 
+                      alt="<% movie.title %> Poster" class="image-hover image-size">
+                      <% } %>
                   </a>
                   
                   <div class="genres">

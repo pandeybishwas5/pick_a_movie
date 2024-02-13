@@ -11,9 +11,9 @@ const options = {
   method: 'GET',
   url: 'https://ott-details.p.rapidapi.com/advancedsearch',
   params: {
-    start_year: '2000',
-    end_year: '2023',
-    min_imdb: '6',
+    start_year: '2010',
+    end_year: '2024',
+    min_imdb: '7',
     max_imdb: '10',
     genre: 'action',
     language: 'english',
@@ -53,7 +53,7 @@ app.get("/search", (req, res) => {
 
 app.post("/search", async(req,res) => {
   const mediaType = req.body.type;
-  const genreList = ['action', 'comedy', 'drama', 'thriller', 'horror'];
+  const genreList = ['action', 'comedy', 'thriller', 'horror'];
   const randomGenre = genreList[Math.floor(Math.random() * genreList.length)];
   console.log(randomGenre);
 
@@ -66,7 +66,9 @@ app.post("/search", async(req,res) => {
   };
   try {
     const response = await axios.request(updatedOptions);
+    console.log(response);
     const apiResponse = response.data;
+    console.log(apiResponse);
     const movies = apiResponse.results;
     res.render("index.ejs", {movies});
     
@@ -92,7 +94,6 @@ app.post("/searchtitle", async(req,res) => {
     const response = await axios.request(options);
     const apiResponse = response.data;
     const results = apiResponse.data;
-    console.log(results);
     res.render("search.ejs", {results});
   } catch (error) {
     console.error(error);

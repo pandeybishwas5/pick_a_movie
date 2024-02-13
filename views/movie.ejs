@@ -10,8 +10,8 @@
     <%- include('navbar.ejs') %>
     <h1><%= movieDetails.title  %></h1>
     <div class = "movie-container">
-    <img src="<%= movieDetails.imageurl[0]%>" alt="<% movieDetails.title %> Poster" >
-    <p> <%= movieDetails.synopsis%> </p>
+      <img src="<%= movieDetails.imageurl[0]%>" alt="<% movieDetails.title %> Poster" >
+      <p> <%= movieDetails.synopsis%> </p>
     </div>
     <div class="genres">
         <% if (movieDetails.genre) { %>
@@ -24,7 +24,7 @@
 
             <% } else { %>
 
-            <p><strong> Genres not available </strong></p>
+              <p><strong> Genres not available </strong></p>
             <% } %>
     </div>
 
