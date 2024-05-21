@@ -2,22 +2,28 @@ import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import path from "path";
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 // Load environment variables from .env file
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const port = process.env.PORT || 5000;
+
+// Set view engine to ejs
+app.set("view engine", "ejs");
+
+// Set the views directory
+app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-// Set view engine to ejs
-app.set("view engine", "ejs");
-app.set('views', path.join(__dirname, 'views'));
 
 const options = {
   method: 'GET',
