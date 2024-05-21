@@ -20,16 +20,17 @@ app.set("view engine", "ejs");
 // Set the views directory
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware
-app.use(express.static("public", { 
-  // Specify options for serving static files
-  setHeaders: (res, path, stat) => {
-    if (path.endsWith(".css")) {
-      // Set the Content-Type header to text/css for CSS files
-      res.set("Content-Type", "text/css");
-    }
+// Middleware to serve static files
+app.use(express.static("public"));
+
+// Middleware to set the correct MIME type for CSS files
+app.use((req, res, next) => {
+  if (req.url.endsWith(".css")) {
+    res.setHeader("Content-Type", "text/css");
   }
-}));
+  next();
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
