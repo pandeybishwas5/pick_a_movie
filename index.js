@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 
 // Set view engine to ejs
 app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'views'));
 
 const options = {
   method: 'GET',
