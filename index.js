@@ -21,7 +21,7 @@ app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware to serve static files
-app.use(express.static("public"));
+app.use(express.static(__dirname + '/public'));
 
 // Middleware to set the correct MIME type for CSS files
 app.use((req, res, next) => {
