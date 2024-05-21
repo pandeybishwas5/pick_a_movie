@@ -1,4 +1,3 @@
-// 1. Import express and axios
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
@@ -6,6 +5,17 @@ import dotenv from "dotenv";
 
 // Load environment variables from .env file
 dotenv.config();
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+// Middleware
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Set view engine to ejs
+app.set("view engine", "ejs");
 
 const options = {
   method: 'GET',
@@ -27,33 +37,21 @@ const options = {
   }
 };
 
-// 2. Create an express app and set the port number.
-const app = express();
-const port = 5000;
-
-// 3. Use the public folder for static files.
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); // Add this line for handling JSON payloads
-
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index");
 });
 
 app.get("/about", (req, res) => {
-  res.render("about.ejs");
+  res.render("about");
 });
 
 app.get("/search", (req, res) => {
-  res.render("search.ejs");
+  res.render("search");
 });
 
 app.post("/search", async (req, res) => {
   try {
     const mediaType = req.body.type;
-    if (!mediaType) {
-      return res.status(400).json({ error: "Media type is required" });
-    }
     const genreList = ['action', 'comedy', 'thriller', 'horror'];
     const randomGenre = genreList[Math.floor(Math.random() * genreList.length)];
     console.log("Random Genre:", randomGenre);
@@ -72,13 +70,12 @@ app.post("/search", async (req, res) => {
     const apiResponse = response.data;
     const movies = apiResponse.results;
 
-    res.render("index.ejs", { movies });
+    res.render("index", { movies });
   } catch (error) {
     console.error("Error in /search route:", error);
     res.status(500).json({ error: "An error occurred" });
   }
 });
-
 
 app.post("/searchtitle", async (req, res) => {
   const newTitle = req.body.type;
@@ -96,7 +93,7 @@ app.post("/searchtitle", async (req, res) => {
     const response = await axios.request(titleOptions);
     const apiResponse = response.data;
     const results = apiResponse.data;
-    res.render("search.ejs", { results });
+    res.render("search", { results });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occurred" });
@@ -127,13 +124,12 @@ app.get("/movie/:id", async (req, res) => {
     const response = await axios.request(updatedOptions);
     const movieDetails = response.data;
     const streaming = movieDetails.streamingAvailability.country.US;
-    res.render("movie.ejs", { movieDetails, streaming, platformData });
+    res.render("movie", { movieDetails, streaming, platformData });
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });
   }
 });
 
-// 6. Listen on your predefined port and start the server.
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
